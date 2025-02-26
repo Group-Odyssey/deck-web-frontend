@@ -1,21 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap'); /* Nunito */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face{ /* Fraiche */
+  font-family: 'Fraiche';
+  src: url('../fonts/fraiche/fraiche.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --main-font: 'Fraiche', sans-serif; 
+  --sub-font: 'Nunito', sans-serif;
+}
+
+/* styles that will be reused throughout the website. */
+
+.fraiche {
+  font-family: var(--main-font);
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: #191919;
+  font-family: var(--sub-font);
 }
