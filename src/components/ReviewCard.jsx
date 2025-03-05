@@ -5,7 +5,7 @@ export default function ReviewCard({user, comment, star}){
                 <div className="w-8 h-8 rounded-full bg-gray-200"></div>
                 <p className="text-[#6D6D6D]">{user}</p>
             </div>
-            <div className="flex text-left items-center mb-4">
+            <div className="flex text-left items-center mb-4 font-bold">
                 {comment}
             </div>
             <div className="flex justify-end">
