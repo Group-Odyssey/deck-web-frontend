@@ -12,7 +12,7 @@ export default function Header(){
             <div className="flex justify-evenly items-center">
                 <NavLink text="Download"/>
                 <NavLink text="Explore"/>
-                <NavLink text="Login" href="/login"/>
+                <NavLink text="Login" href="/authentication"/>
                 <NavLink text="Get Started!" isButton={true}/>
             </div>
         </div>

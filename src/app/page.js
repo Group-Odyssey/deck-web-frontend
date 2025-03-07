@@ -1,7 +1,7 @@
 import NavLink from "@/components/NavLink";
 import ReviewCard from "@/components/ReviewCard";
-import Header from "@/components/header";
-import Footer from "@/components/footer"
+import Header from "@/components/HeroHeader";
+import Footer from "@/components/HeroFooter"
 
 export default function Home() {
   return(

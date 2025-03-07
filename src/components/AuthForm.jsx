@@ -3,23 +3,24 @@ import Image from 'next/image'
 import NavLink from './NavLink'
 import { useState } from 'react';
 import { FcGoogle } from "react-icons/fc";
+import { useRouter } from "next/navigation";
 
 export default function AuthForm ({isSignUp, toggleForm}) {
-    const [isLogin, setIsLogin] = useState(true);
+    const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = async (e) => { //TODO: Backend part
+    const handleLoginSubmit = async (e) => { //TODO: Backend part
         e.preventDefault()
         setLoading(true);
         try {
-            const response = await fetch("", {
+            const response = await fetch("tests/api/auth", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ email, password }),
+              body: JSON.stringify({ isSignUp, email, password }),
             });
       
             const data = await response.json();
@@ -29,6 +30,7 @@ export default function AuthForm ({isSignUp, toggleForm}) {
             }
       
             console.log("Login successful", data);
+            router.push("/home")
             // Store user session (if needed)
           } catch (error) {
             console.log(error.message);
@@ -37,15 +39,17 @@ export default function AuthForm ({isSignUp, toggleForm}) {
           }
     }
 
+    const handleSignUpSubmit = async (e) => {
+
+    }
+
     return (
-        <form onSubmit={handleSubmit} className={`w-1/2 h-full flex flex-col bg-white p-4 text-[#9F9F9F] ${
-            isLogin ? "translate-x-0" : "translate-x-full"
-          }`}>
+        <form onSubmit={isSignUp ? handleSignUpSubmit : handleLoginSubmit} className={"w-1/2 h-full flex flex-col bg-white p-4 text-[#9F9F9F]"}>
             <div className='flex justify-start items-center'>
                 <Image src="/deck_assets/Deck-Branding7.png" width={'40'} height={'40'} alt=""/>
                 <p className="ml-1 fraiche text-xl text-[#12454C]">Deck</p>
             </div>
-            <p className="fraiche text-xl font-bold text-[#191919]">{isSignUp ? "Sign Up" : "Log In"}</p>
+            <p className="fraiche text-xl text-[#191919]">{isSignUp ? "Sign Up" : "Log In"}</p>
 
             <label htmlFor="email" className="mt-2 text-[#191919]">Email</label>
             <input name="email" type="text" className="p-1 border text-black rounded-lg" value={email}
@@ -76,7 +80,7 @@ export default function AuthForm ({isSignUp, toggleForm}) {
                 {isSignUp ? "Already have an account?" : "Don't have an account?"}  <a href="#" className="text-[#191919] font-bold" onClick={toggleForm}>{isSignUp ? "Log In" : "Sign Up"}</a>
             </p>
             {isSignUp ? <p className="text-center text-xs mt-4">
-              By proceeding you acknowledge that you have read, understood and agree to our <a className='font-bold underline' href="/terms_services">Terms</a> and <a className='font-bold underline' href="/privacy_policy">Policy</a>.
+              By proceeding you acknowledge that you have read, understood and agree to our <a className='font-bold underline' href="/terms_and_policy">Terms</a> and <a className='font-bold underline' href="/terms_and_policy">Policy</a>.
             </p> : ""}
         </form>
     );
